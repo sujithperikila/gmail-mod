@@ -8,7 +8,7 @@ from google.auth.transport.requests import Request
 
 
 from search_msg import SearchMessages
-# from read_msg import ReadMessage
+from process_msg import ReadMessage
 from action import TakeAction
 from database import Database
 import json
@@ -31,7 +31,7 @@ class Main:
     def __init__(self):
         self.service = self.gmail_authenticate()
         self.sm = SearchMessages(self.service)
-        # self.rm = ReadMessage(self.service)
+        self.rm = ReadMessage(self.service)
         self.mm = TakeAction(self.service)
         pass
     
@@ -174,6 +174,8 @@ if __name__=='__main__':
         
     # Update Database
     db = Database()
+    for msg in range(len(messages)):
+        messages[msg] = obj.rm.read_message(messages[msg])
     status = db.add_msgs_to_database(messages)
     if status:
         print('Database Update Succesful')

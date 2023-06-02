@@ -46,6 +46,10 @@ You might be asked to authenticate via Google page, post which a token would be 
 
 All the tasks would be completed automatically as per rules set.
 
+# Database Integration
+sqlite3 is used to store the filtered mails. 
+'mails.db' is the source of the relational database. Table 'mails' is created and the filtered mails are stored in a relational format.
+
 
 
 ## 🔗 Links
