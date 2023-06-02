@@ -1,0 +1,26 @@
+
+{
+    "predicate":"all",
+    "rules":{
+        "Rule1":{
+            "field":"from",
+            "predicate":"contains",
+            "value":"happyfox.hire.trakstar.com"
+        },
+        "Rule2":{
+            "field":"subject",
+            "predicate":"contains",
+            "value":"interview"
+        },
+        "Rule3":{
+            "field":"Date Received",
+            "predicate":"is less than",
+            "value":"20"
+        }
+        
+    },
+    "action":"move to inbox"
+    
+
+}
+
