@@ -5,7 +5,7 @@ import datetime
     
 class Database:
     def __init__(self):
-        self.conn = sqlite3.connect('mails.db')
+        self.conn = sqlite3.connect('mails.db',detect_types=sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES)
         if self.conn:
             "Database Initiated Successfully"
     
@@ -28,5 +28,28 @@ class Database:
             self.conn.close()
             return True
         except Exception as e:
-            print(str(e))
+            
             return False
+        
+    def get_mails_form_db(self):
+        try:
+            msgs = []
+            conn = sqlite3.connect('mails.db',detect_types=sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES)
+            cursor = conn.cursor()
+            query = '''SELECT * from mails'''
+            cursor.execute(query)
+            records = cursor.fetchall()
+            for item in records:
+                tmp={}
+                tmp['from'] = item[0]
+                tmp['to'] = item[1]
+                tmp['subject']  = item[2]
+                tmp['date'] = item[3]
+                tmp['id'] = item[4]
+                tmp['threadId'] = item[5]
+                msgs.append(tmp)
+            return msgs
+        except Exception as e:
+            print(str(e))
+            return []
+        
